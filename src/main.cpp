@@ -8,10 +8,10 @@
 
 #define PIN 13 //NeoPixl
 
-char ssid[] = "";
-char pass[] = "";
+char ssid[] = "CHANGEME";
+char pass[] = "CHANGEME";
 
-IPAddress server(192, 168, 1, 1);
+IPAddress server(192, 168, 1, 1); // add the ip of your mqtt broker hardware
 // Callback function header
 void callback(char* topic, byte* payload, unsigned int length);
 void colorWipe(uint32_t c, uint8_t wait);

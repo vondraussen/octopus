@@ -4,6 +4,7 @@ The Octopus is equipped with two RGB LED's wich are controlled via MQTT messages
 
 ## IDE
 I've used platformio to code and build. See [platformio.org](http://platformio.org/)
+
 You could use arduino ide instead.
 
 # Howto simple setup with Raspberry Pi

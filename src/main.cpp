@@ -50,9 +50,9 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   if (client.connect("arduinoClient")) {
-    client.subscribe("/octo/led1/red");
-    client.subscribe("/octo/led1/green");
-    client.subscribe("/octo/led1/blue");
+    client.subscribe("octo/led1/red");
+    client.subscribe("octo/led1/green");
+    client.subscribe("octo/led1/blue");
   }
 }
 
@@ -60,11 +60,11 @@ void loop() {
   char buffer[10];
 
   dtostrf(bme.readPressure() / 100.0F, 5, 1, buffer);
-  client.publish("/octo/press",buffer);
+  client.publish("octo/press",buffer);
   dtostrf(bme.readTemperature(), 5, 1, buffer);
-  client.publish("/octo/temp",buffer);
+  client.publish("octo/temp",buffer);
   itoa(bme.readHumidity(), buffer, 10);
-  client.publish("/octo/humi",buffer);
+  client.publish("octo/humi",buffer);
   client.loop();
   delay(100);
 }
@@ -75,13 +75,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
   char* buf_str = (char*)calloc(length+1, sizeof(char));
   memcpy(buf_str, (const char*)payload, length);
 
-  if (!strcmp(topic, "/octo/led1/red")) {
+  if (!strcmp(topic, "octo/led1/red")) {
     red = strtol((const char*)buf_str, NULL, 10);
   }
-  if (!strcmp(topic, "/octo/led1/green")) {
+  if (!strcmp(topic, "octo/led1/green")) {
     green = strtol((const char*)buf_str, NULL, 10);
   }
-  if (!strcmp(topic, "/octo/led1/blue")) {
+  if (!strcmp(topic, "octo/led1/blue")) {
     blue = strtol((const char*)buf_str, NULL, 10);
   }
   strip.setPixelColor(0, red, green, blue, 0);
